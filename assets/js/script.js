@@ -14,3 +14,18 @@
 // Year added to the U.S
 // Modal to minimize
 // Chosen card to remain highlighted
+
+
+// Example of card
+/* <div class="card">
+<div class="card-content">
+  <div class="media">
+    <div class="media-content">
+      <p class="title is-4">Illinois</p>
+      <p class="subtitle is-6">Springfield</p>
+    </div>
+  </div>
+</div>
+</div> */
+
+test
