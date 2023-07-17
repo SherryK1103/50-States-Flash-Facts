@@ -36,12 +36,12 @@ const containerEl = document.getElementById('container');
 
 function createCard (state) {
    return `
-   <div class="card is-three-quarters has-background-primary is-2">
+   <div class="card has-background-info fifth-width">
         <div class="card-content">
             <div class="media">
                 <div class="media-content">
-                    <p class="title is-4">${state.name}</p>
-                    <p class="subtitle is-6">${state.abbreviation}</p>
+                    <p class="title is-4 has-text-white">${state.name}</p>
+                    <p class="subtitle is-6 has-text-white">${state.abbreviation}</p>
                 </div>
             </div>
         </div>
@@ -50,6 +50,8 @@ function createCard (state) {
 }
 
 for (let i = 0; i < ALL_STATES.length; i++) {
+    let tenCounter = 0;
     let stateCard = createCard(ALL_STATES[i])
     containerEl.innerHTML += stateCard;
+    tenCounter++;
 }
