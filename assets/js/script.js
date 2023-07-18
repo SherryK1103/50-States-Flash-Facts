@@ -49,9 +49,20 @@ function createCard (state) {
     `
 }
 
+// document.getElementById("demo").id = "newid";
+
 for (let i = 0; i < ALL_STATES.length; i++) {
     let tenCounter = 0;
     let stateCard = createCard(ALL_STATES[i])
+    console.log(stateCard);
     containerEl.innerHTML += stateCard;
     tenCounter++;
+    // containerEl.addEventListener('click', function() {
+    //   var cardEl = document.getElementById('card-1');
+    //   console.log(cardEl);
+    //   cardEl.classList.remove('has-background-info');
+    //   cardEl.classList.add('has-background-danger');
+    // });
+
 }
+
