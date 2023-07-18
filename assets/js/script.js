@@ -33,8 +33,8 @@ const ALL_STATES = [{"name":"Alabama","abbreviation":"AL"},{"name":"Alaska","abb
 
 function createCard (state, uniqueId) {
    return `
-   <div id=${uniqueId} class="card has-background-info fifth-width">
-        <div class="card-content">
+   <div id=${uniqueId} class="card has-background-info fifth-width js-modal-trigger" data-target="modal-js-example"
+   <div class="card-content">
             <div class="media">
                 <div class="media-content">
                     <p class="title is-4 has-text-white">${state.name}</p>
@@ -59,10 +59,57 @@ function cardClickHandler(event) {
   const cardEl = event.currentTarget;
   cardEl.classList.remove('has-background-info');
   cardEl.classList.add('has-background-danger');
+
+  
 }
 
 const cardElements = document.querySelectorAll('.card');
 
 cardElements.forEach(card => {
   card.addEventListener('click', cardClickHandler);
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Functions to open and close a modal
+  function openModal($el) {
+    $el.classList.add('is-active');
+  }
+
+  function closeModal($el) {
+    $el.classList.remove('is-active');
+  }
+
+  function closeAllModals() {
+    (document.querySelectorAll('.modal') || []).forEach(($modal) => {
+      closeModal($modal);
+    });
+  }
+
+  // Add a click event on buttons to open a specific modal
+  (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
+    const modal = $trigger.dataset.target;
+    const $target = document.getElementById(modal);
+
+    $trigger.addEventListener('click', () => {
+      openModal($target);
+    });
+  });
+
+  // Add a click event on various child elements to close the parent modal
+  (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
+    const $target = $close.closest('.modal');
+
+    $close.addEventListener('click', () => {
+      closeModal($target);
+    });
+  });
+
+  // Add a keyboard event to close all modals
+  document.addEventListener('keydown', (event) => {
+    const e = event || window.event;
+
+    if (e.keyCode === 27) { // Escape key
+      closeAllModals();
+    }
+  });
 });
