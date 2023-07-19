@@ -1,14 +1,17 @@
 // Imported JSON array from https://gist.github.com/mshafrir/2646763
 const ALL_STATES = [{"name":"Alabama","abbreviation":"AL"},{"name":"Alaska","abbreviation":"AK"},{"name":"Arizona","abbreviation":"AZ"},{"name":"Arkansas","abbreviation":"AR"},{"name":"California","abbreviation":"CA"},{"name":"Colorado","abbreviation":"CO"},{"name":"Connecticut","abbreviation":"CT"},{"name":"Delaware","abbreviation":"DE"},{"name":"Florida","abbreviation":"FL"},{"name":"Georgia","abbreviation":"GA"},{"name":"Hawaii","abbreviation":"HI"},{"name":"Idaho","abbreviation":"ID"},{"name":"Illinois","abbreviation":"IL"},{"name":"Indiana","abbreviation":"IN"},{"name":"Iowa","abbreviation":"IA"},{"name":"Kansas","abbreviation":"KS"},{"name":"Kentucky","abbreviation":"KY"},{"name":"Louisiana","abbreviation":"LA"},{"name":"Maine","abbreviation":"ME"},{"name":"Maryland","abbreviation":"MD"},{"name":"Massachusetts","abbreviation":"MA"},{"name":"Michigan","abbreviation":"MI"},{"name":"Minnesota","abbreviation":"MN"},{"name":"Mississippi","abbreviation":"MS"},{"name":"Missouri","abbreviation":"MO"},{"name":"Montana","abbreviation":"MT"},{"name":"Nebraska","abbreviation":"NE"},{"name":"Nevada","abbreviation":"NV"},{"name":"New Hampshire","abbreviation":"NH"},{"name":"New Jersey","abbreviation":"NJ"},{"name":"New Mexico","abbreviation":"NM"},{"name":"New York","abbreviation":"NY"},{"name":"North Carolina","abbreviation":"NC"},{"name":"North Dakota","abbreviation":"ND"},{"name":"Ohio","abbreviation":"OH"},{"name":"Oklahoma","abbreviation":"OK"},{"name":"Oregon","abbreviation":"OR"},{"name":"Pennsylvania","abbreviation":"PA"},{"name":"Rhode Island","abbreviation":"RI"},{"name":"South Carolina","abbreviation":"SC"},{"name":"South Dakota","abbreviation":"SD"},{"name":"Tennessee","abbreviation":"TN"},{"name":"Texas","abbreviation":"TX"},{"name":"Utah","abbreviation":"UT"},{"name":"Vermont","abbreviation":"VT"},{"name":"Virginia","abbreviation":"VA"},{"name":"Washington","abbreviation":"WA"},{"name":"West Virginia","abbreviation":"WV"},{"name":"Wisconsin","abbreviation":"WI"},{"name":"Wyoming","abbreviation":"WY"}];
 
+// Starting blank State
+let selectedState = "";
+
 // Function to create a card with the correct values
 function createCard (state, uniqueId) {
    return `
    <div id=${uniqueId} class="card has-background-info fifth-width js-modal-trigger" data-target="modal-js-example">
-   <div class="card-content">
+    <div class="card-content">
             <div class="media">
                 <div class="media-content">
-                    <p class="title is-4 has-text-white">${state.name}</p>
+                    <p id=${state.name} class="title is-4 has-text-white">${state.name}</p>
                     <p class="subtitle is-6 has-text-white">${state.abbreviation}</p>
                 </div>
             </div>
@@ -83,16 +86,47 @@ cardElements.forEach(card => {
   card.addEventListener('click', cardClickHandler);
 });
 
+
+
 // Changes the card color when clicked
 function cardClickHandler(event) {
+  // Color changing section
   const cardEl = event.currentTarget;
   cardEl.classList.remove('has-background-info');
   cardEl.classList.add('has-background-danger');
 
   let cardId = cardEl.id;
   let isDanger = cardEl.classList.contains('has-background-danger');
-  
+
   localStorage.setItem(cardId, isDanger)
+
+  // Wikipedia API calling section
+  selectedState = cardEl.querySelector(".card-content > .media > .media-content > .title").textContent;
+  console.log(selectedState);
+
+  let searchWiki = 'https://en.wikipedia.org/api/rest_v1/page/summary/' + selectedState;
+  let searchMaps = "https://maps.googleapis.com/maps/api/staticmap?center="+selectedState+"&size=512x512&key=AIzaSyBedi1-Pcq-GljIp9IrUYs3C__jUhtgloM";
+
+  const modalTitleEl = document.getElementById('modal-title');
+  const modalDescEl = document.getElementById('summary');
+  const modalMapEl = document.getElementById('map');
+
+  let modalImgEl = document.createElement('img');
+  modalImgEl.src = searchMaps;
+  modalImgEl.alt = "Map of " + selectedState;
+
+
+  fetch(searchWiki)
+      .then((response) =>{
+        return response.json();
+     })
+     .then((data) => {
+        console.log(data.extract);
+        modalTitleEl.textContent = selectedState;
+        modalDescEl.textContent = data.extract;
+        modalMapEl.appendChild(modalImgEl);
+     })
+  
 
 }
 
@@ -111,3 +145,5 @@ function loadCardStates() {
 
 // Calls function on page load
 loadCardStates();
+
+

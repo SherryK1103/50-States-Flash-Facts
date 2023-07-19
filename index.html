@@ -79,12 +79,19 @@
     <script src="./assets/js/script.js"></script>
     <div id="modal-js-example" class="modal">
       <div class="modal-background"></div>
-    
-      <div class="modal-content">
-        <div class="box">
-          <p>Modal JS example</p>
-      
-        </div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p id ="modal-title" class="modal-card-title"></p>
+          <button class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+          <div class="content">
+            <h2>Summary</h2>
+            <div id="summary"></div>
+            <h2>Map Image</h2>
+            <div id="map"></div>
+          </div>
+        </section>
       </div>
     
       <button class="modal-close is-large" aria-label="close"></button>
