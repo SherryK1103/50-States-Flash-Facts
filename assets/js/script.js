@@ -60,7 +60,11 @@ function cardClickHandler(event) {
   cardEl.classList.remove('has-background-info');
   cardEl.classList.add('has-background-danger');
 
+  let cardId = cardEl.id;
+  let isDanger = cardEl.classList.contains('has-background-danger');
   
+  localStorage.setItem(cardId, isDanger)
+
 }
 
 const cardElements = document.querySelectorAll('.card');
@@ -113,3 +117,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
