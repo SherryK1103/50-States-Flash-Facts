@@ -110,6 +110,8 @@ function cardClickHandler(event) {
   const modalTitleEl = document.getElementById('modal-title');
   const modalDescEl = document.getElementById('summary');
   const modalMapEl = document.getElementById('map');
+  modalMapEl.innerHTML = "";
+
 
   let modalImgEl = document.createElement('img');
   modalImgEl.src = searchMaps;
