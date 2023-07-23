@@ -19,8 +19,9 @@ https://sherryk1103.github.io/Group-Challenge-01-50-States/
 
 ## Process Steps
 
+feature/READMEtypo2
 1. Created a unique GitHub repo for this project
 2. Pseudocoded and delegated tasks
-3. Created folder structure and relevent files
+3. Created folder structure and relevant files
 4. Linked JavaScript, HTML, and Bulma
 5. Set up Google Maps API and WikiPedia API's
