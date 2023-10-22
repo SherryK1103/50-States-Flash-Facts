@@ -2,10 +2,7 @@
 
 ## Description
 
-AS A citizen of the world
-I WANT a consolidated place that contains info on each US state
-SO THAT I can learn facts more effectively
-This website will consolidate all necessary info about each state in one page
+A website where you can easily learn some basic and quick facts about each of the 50 United States of America in a flashcard-like format. This website will consolidate all necessary info about each state in one page
 This will be useful for:
 
 - Travel planning
