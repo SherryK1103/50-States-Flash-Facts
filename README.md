@@ -16,7 +16,7 @@ Git clone <paste SSH key>
 
 ## Deployed Link
 
-https://sherryk1103.github.io/Group-Challenge-01-50-States/
+https://sherryk1103.github.io/50-States-Flash-Facts/
 
 ## Usage
 
